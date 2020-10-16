@@ -3,11 +3,11 @@ FROM ubuntu:18.04
 
 #Install Ngnix
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    nginx/1.19.0-0ubuntu1.7 \
-    && rm -rf /var/lib/apt/lists/* 
+    && apt-get install -y nginx  \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
-RUN printf "\ndaemon off;" >> /etc/nginx/nginx.conf \
-    && chown -R www-data:www-data /var/lib/nginx
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf 
 
 #Define Working directory 
 WORKDIR /etc/nginx
