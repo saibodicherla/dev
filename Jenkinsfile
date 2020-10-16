@@ -7,7 +7,7 @@ pipeline {
       PROJECT = 'nginx-container'
       IMAGE = "$PROJECT"
       ECRURL = "https://565323501885.dkr.ecr.eu-west-1.amazonaws.com/$PROJECT"
-      ECRCRED = 'ecr:eu-west-1:aws-credential'
+      ECRCRED = 'ecr:eu-west-1:aws-credentials'
   }
   stages {
     stage('Git checkout') {
