@@ -1,10 +1,8 @@
 FROM ubuntu:latest
 
-WORKDIR /app
+RUN apt-get update && apt-get install
 
 RUN apt-get install nginx -y
-
-COPY . ./
 
 EXPOSE 80
 
