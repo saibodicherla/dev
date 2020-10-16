@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 
 #Install Ngnix
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    nginx=1.18.0-ubuntu:18.04 \
+    nginx=1.18.0 \
     && rm -rf /var/lib/apt/lists/* 
 
 RUN printf "\ndaemon off;" >> /etc/nginx/nginx.conf \
