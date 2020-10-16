@@ -14,13 +14,7 @@ pipeline {
         steps {
                 checkout scm
             }
-        }
-
-    stage('Lint Dockerfile') {
-        steps {
-            sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
-            }
-        }
+        }ç
 
     stage('Build Docker Image') {
         steps {
