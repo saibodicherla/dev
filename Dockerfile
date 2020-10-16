@@ -1,5 +1,5 @@
 # Pull base image from Dockerhub.
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 #Install Ngnix
 RUN \
