@@ -18,20 +18,17 @@ pipeline {
             steps {
                     echo 'Linting Dockerfile'
                     sh 'hadolint --ignore DL3006 /Dockerfile'
-
-                    echo 'Linting HTML Code'
-                    sh 'tidy -q -e *.html'
                 }
-        }
+            }
 
 		stage('Build Docker image') {
             steps {
                 script {
                     // Build the docker image using a Dockerfile
                         docker.build("$IMAGE")
+                    }
                 }
-            }
-        }  
+            }  
 
 		stage('Push image to ECR') {
             steps {
@@ -56,6 +53,6 @@ pipeline {
 		always {
 		    // make sure that the Docker image is removed
 		    sh "docker rmi $IMAGE | true"
-		}
-	}
+		    }
+	    }
 }
