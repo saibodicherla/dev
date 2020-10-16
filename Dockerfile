@@ -1,4 +1,4 @@
-FROM ubuntu:18.0.4
+FROM ubuntu:latest
 
 RUN apt-get update && apt-get upgrade -y
 
