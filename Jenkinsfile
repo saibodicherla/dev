@@ -12,7 +12,19 @@ pipeline {
   stages {
     stage('Git checkout') {
         steps {
-                checkout scm
+                // calculate GIT lastest commit short-hash
+                gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                shortCommitHash = gitCommitHash.take(7)
+                // calculate a sample version tag
+                VERSION = shortCommitHash
+                // set the build display name
+                currentBuild.displayName = "#${BUILD_ID}-${VERSION}"
+            }
+        }
+
+    stage('Lint Dockerfile') {
+        steps {
+            sh "hadolint --ignore DL3006 /Dockerfile"
             }
         }
 
@@ -23,8 +35,7 @@ pipeline {
                     docker.build('$IMAGE')
                 }
             }
-        }
-    
+        }   
     stage('Push Image to ECR') {
         steps {
             script {    
