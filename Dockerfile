@@ -3,8 +3,7 @@ FROM ubuntu:18.04
 
 #Install Ngnix
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    && apt-get install -y nginx  \
-    && apt-get clean \
+    && nginx  \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf 
