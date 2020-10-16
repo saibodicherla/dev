@@ -16,12 +16,6 @@ pipeline {
             }
         }
 
-    stage('Security Scan') {
-        steps {
-                aquaMicroscanner imageName: 'alpine:latest',  onDisallowed: 'fail'
-            }
-        }
-
     stage('Build Docker Image') {
         steps {
             script{
