@@ -45,14 +45,15 @@ pipeline {
                     withAWS(credentials: 'aws-credential', region: 'eu-west-1') {
                         sh "aws cloudformation create-stack --stack-name devserver --region eu-west-1 --template-body://provision.yml"
                         sh 'docker run -p 80:80 -d  --name Grid-app ${IMAGE}:${VERSION}'
+                        }
                     }
                 }
-            }
-    }
-	post {
+        }
+
+    post {
 		always {
 		    // make sure that the Docker image is removed
 		    sh "docker rmi $IMAGE | true"
 		    }
 	    }
-}
+    }
