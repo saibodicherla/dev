@@ -6,7 +6,7 @@ pipeline {
       VERSION = 'latest'
       PROJECT = 'nginx-container'
       IMAGE = "$PROJECT"
-      ECRURL = 'https://565323501885.dkr.ecr.eu-west-1.amazonaws.com/'
+      ECRURL = "https://565323501885.dkr.ecr.eu-west-1.amazonaws.com/$PROJECT"
       ECRCRED = 'ecr:eu-west-1:aws-credential'
   }
   stages {
@@ -18,7 +18,7 @@ pipeline {
 
     stage('Security Scan') {
         steps {
-                aquaMicroscanner imageName: 'alpine:latest', notCompleted: 'exit 1', onDisallowed: 'fail'
+                aquaMicroscanner imageName: 'alpine:latest',  onDisallowed: 'fail'
             }
         }
 
@@ -26,7 +26,7 @@ pipeline {
         steps {
             script{
                 // Build the docker image using a Dockerfile
-                    docker.build('$IMAGE')
+                    docker.build("$IMAGE")
                 }
             }
         }
