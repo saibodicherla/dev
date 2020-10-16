@@ -16,9 +16,9 @@ pipeline {
             }
         }
 
-    stage('Lint Dockerfile') {
+    stage('Security Scan') {
         steps {
-            sh "hadolint --ignore DL3006 ./Dockerfile"
+                aquaMicroscanner imageName: 'alpine:latest', notCompleted: 'exit 1', onDisallowed: 'fail'
             }
         }
 
