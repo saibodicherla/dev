@@ -1,17 +1,9 @@
-# Pull base image from Dockerhub.
-FROM ubuntu:18.04
+FROM ubuntu:18.0.4
 
-#Install Ngnix
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    && nginx install \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+RUN apt-get update && apt-get upgrade -y
 
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf 
+RUN apt-get install nginx -y
 
-#Define Working directory 
-WORKDIR /etc/nginx
-
-# Expose ports
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
