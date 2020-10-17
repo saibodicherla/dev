@@ -36,18 +36,10 @@ pipeline {
             }        
         }
     
-    stage('Create a EC2 instance') {
+    stage('Deploy nginx Container on EC2') {
         steps {
             withAWS(region:'eu-west-1',credentials:'aws-credentials') {
-                sh "aws cloudformation create-stack --stack-name devserver --region eu-west-1 --template-body://provision.yml" 
-                }
-            }
-        }
-
-    stage('Run nginx Container on DevServer') {
-        steps {
-            withAWS(region:'eu-west-1',credentials:'aws-credentials') {
-                sh "docker run -p 80:80 -d  --name Grid-app ${IMAGE}:${VERSION}"
+                sh "./deploy.sh ngnix provision.yml"  
                 }
             }
         }
