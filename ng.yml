@@ -151,9 +151,3 @@ Outputs:
         Value: !Ref PublicSubnet
         Export:
           Name: !Sub ${EnvironmentName}-PUB-SN
-
-    PublicURL:
-        Description: App URL
-        Value: !GetAtt Ec2Instance.PublicDnsName
-        Export:
-          Name: !Sub PublicURL
