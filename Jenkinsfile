@@ -40,6 +40,7 @@ pipeline {
         def dockerRun = 'docker run -p 80:80 -d --name nginx-app nginx-container:latest'
         sshagent(['Jenkins']) {
             sh "ssh -o StrictHostKeyChecking=no -l ec2-user@54.217.11.13 ${dockerRun}"
+            }
         }
     }
 }
