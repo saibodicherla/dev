@@ -37,11 +37,9 @@ pipeline {
         }
     
     stage('Deploy nginx Container on EC2') {
-        steps {
-            withAWS(region:'eu-west-1',credentials:'aws-credentials') {
-                sh "aws cloudformation create-stack --stack-name ngnix --region eu-west-1 --template-body file://provision.yml"  
-                }
-            }
+        def dockerRun = 'docker run -p 80:80 -d -name nginx-app nginx-container:latest'
+        sshagent(['Jenkins']) {
+            sh "ssh -o StrictHostKeyChecking=no -l ec2-user@54.217.11.13 ${dockerRun}"
         }
     }
 }
