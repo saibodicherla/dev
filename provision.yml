@@ -113,6 +113,8 @@ Resources:
                     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
                     apt-get update -y
                     apt-get install -y docker-ce docker-ce-cli containerd.io
+                    service docker start 
+                    docker run -it --rm -d -p 80:80 --name App nginx-container
             ImageId: ami-0823c236601fef765
             SecurityGroups:
                 - Ref: DevServerSecurityGroup
@@ -149,3 +151,9 @@ Outputs:
         Value: !Ref PublicSubnet
         Export:
           Name: !Sub ${EnvironmentName}-PUB-SN
+
+    PublicURL:
+        Description: App URL
+        Value: !GetAtt Ec2Instance.PublicDnsName
+        Export:
+          Name: !Sub PublicURL
