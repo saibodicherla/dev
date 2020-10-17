@@ -38,9 +38,8 @@ pipeline {
     
     stage('Deploy nginx Container on EC2') {
         steps {
-            def dockerRun = 'docker run -p 80:80 -d --name my-app nginx-container:latest'
             sshagent(['Jenkins']) {
-                sh "ssh -o StrictHostKeyChecking=no -l ec2-user@172.31.46.25 ${dockerRun}"
+                sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@172.31.46.25 docker run -p 80:80 -d --name my-app nginx-container:latest'
                 }
             }
         }
