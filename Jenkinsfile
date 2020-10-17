@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy nginx Container on EC2') {
         steps {
             withAWS(region:'eu-west-1',credentials:'aws-credentials') {
-                sh "./deploy.sh ngnix provision.yml"  
+                sh "deploy.sh ngnix provision.yml"  
                 }
             }
         }
