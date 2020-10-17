@@ -38,9 +38,7 @@ pipeline {
     
     stage('Deploy nginx Container on EC2') {
         steps {
-            sshagent(['Jenkins']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@172.31.46.25 docker run -p 80:80 -d --name my-app nginx-container:latest'
-                }
+            sh "aws cloudformation create-stack 'eu-west-1'--stack-name ec2 --template-body file://ng.json --region"
             }
         }
     }
