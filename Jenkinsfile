@@ -39,6 +39,7 @@ pipeline {
     stage('Deploy nginx Container on EC2') {
         steps {
             sh "aws cloudformation create-stack 'eu-west-1'--stack-name ec2 --template-body file://ng.json --region"
+            sh "docker run -p 80:80 -d --name nginx-app nginx-container"
             }
         }
     }
